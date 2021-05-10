@@ -34,7 +34,7 @@
                                     "--storage_uri",
                                     "s3://kind-minio://models/cifar10-od",
                                     "--reply_url",
-                                    "http://seldon-request-logger.seldon-logs",
+                                    "http://hello-display.seldon",
                                     "--event_type",
                                     "io.seldon.serving.inference.outlier",
                                     "--event_source",
