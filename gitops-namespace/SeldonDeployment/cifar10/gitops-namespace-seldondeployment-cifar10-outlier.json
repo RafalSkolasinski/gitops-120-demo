@@ -32,7 +32,7 @@
                                     "--protocol",
                                     "tensorflow.http",
                                     "--storage_uri",
-                                    "gs://seldon-models/alibi-detect/od/OutlierVAE/cifar10",
+                                    "s3://kind-minio://models/cifar10-od",
                                     "--reply_url",
                                     "http://seldon-request-logger.seldon-logs",
                                     "--event_type",
@@ -42,6 +42,13 @@
                                     "OutlierDetector",
                                     "--drift_batch_size",
                                     "1000"
+                                ],
+                                "envFrom": [
+                                    {
+                                        "secretRef": {
+                                            "name": "seldon-minio-secret"
+                                        }
+                                    }
                                 ],
                                 "resources": {},
                                 "securityContext": {
