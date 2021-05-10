@@ -32,7 +32,7 @@
                                     "--protocol",
                                     "tensorflow.http",
                                     "--storage_uri",
-                                    "s3://kind-minio://models/cifar10-od",
+                                    "s3://models/cifar10-od",
                                     "--reply_url",
                                     "http://hello-display.seldon",
                                     "--event_type",
