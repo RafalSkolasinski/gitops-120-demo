@@ -1,0 +1,65 @@
+{
+    "kind": "List",
+    "apiVersion": "v1",
+    "metadata": {},
+    "items": [
+        {
+            "kind": "Service",
+            "apiVersion": "serving.knative.dev/v1",
+            "metadata": {
+                "name": "gitops-namespace-seldondeployment-od-rclone-outlier",
+                "namespace": "gitops-namespace",
+                "creationTimestamp": null
+            },
+            "spec": {
+                "template": {
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "labels": {
+                            "fluentd": "true"
+                        }
+                    },
+                    "spec": {
+                        "containers": [
+                            {
+                                "name": "outlier-detector",
+                                "image": "seldonio/alibi-detect-server:1.6.0-PR2923",
+                                "args": [
+                                    "--model_name",
+                                    "od-rclone",
+                                    "--http_port",
+                                    "8080",
+                                    "--protocol",
+                                    "tensorflow.http",
+                                    "--storage_uri",
+                                    "s3://models/cifar10-od",
+                                    "--reply_url",
+                                    "http://hello-display.seldon",
+                                    "--event_type",
+                                    "io.seldon.serving.inference.outlier",
+                                    "--event_source",
+                                    "io.seldon.serving.gitops-namespace-seldondeployment-od-rclone-outlier",
+                                    "OutlierDetector",
+                                    "--drift_batch_size",
+                                    "1000"
+                                ],
+                                "envFrom": [
+                                    {
+                                        "secretRef": {
+                                            "name": "seldon-rclone-secret"
+                                        }
+                                    }
+                                ],
+                                "resources": {},
+                                "securityContext": {
+                                    "runAsUser": 8888
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            "status": {}
+        }
+    ]
+}
