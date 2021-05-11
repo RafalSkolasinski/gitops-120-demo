@@ -23,7 +23,7 @@
                         "containers": [
                             {
                                 "name": "outlier-detector",
-                                "image": "seldonio/alibi-detect-server:1.6.0-PR2923",
+                                "image": "dev.local/alibi-detect-server:1.8.0-dev",
                                 "args": [
                                     "--model_name",
                                     "od-legacy",
