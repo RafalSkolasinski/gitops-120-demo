@@ -32,7 +32,7 @@
                                     "--protocol",
                                     "tensorflow.http",
                                     "--storage_uri",
-                                    "s3://models/cifar10",
+                                    "s3://models/cifar10-od",
                                     "--reply_url",
                                     "http://hello-display.seldon",
                                     "--event_type",
@@ -42,6 +42,13 @@
                                     "OutlierDetector",
                                     "--drift_batch_size",
                                     "1000"
+                                ],
+                                "envFrom": [
+                                    {
+                                        "secretRef": {
+                                            "name": "seldon-minio-secret"
+                                        }
+                                    }
                                 ],
                                 "resources": {},
                                 "securityContext": {
